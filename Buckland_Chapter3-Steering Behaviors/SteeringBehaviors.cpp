@@ -48,6 +48,7 @@ SteeringBehavior::SteeringBehavior(Vehicle* agent):
              m_dWeightArrive(Prm.ArriveWeight),
              m_dWeightPursuit(Prm.PursuitWeight),
              m_dWeightOffsetPursuit(Prm.OffsetPursuitWeight),
+			 m_dWeightAgentPursuit(Prm.AgentPursuitWeight),     //MC
              m_dWeightInterpose(Prm.InterposeWeight),
              m_dWeightHide(Prm.HideWeight),
              m_dWeightEvade(Prm.EvadeWeight),
@@ -326,6 +327,16 @@ Vector2D SteeringBehavior::CalculatePrioritized()
     if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
   }
 
+  if (On(agent_pursuit)) //MC
+  {
+    assert (m_pTargetAgent1 && "pursuit target not assigned");
+    assert (!m_vOffset.isZero() && "No offset assigned");
+
+    force = AgentPursuit(m_pTargetAgent1, m_vOffset);
+
+    if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
+  }
+
   if (On(interpose))
   {
     assert (m_pTargetAgent1 && m_pTargetAgent2 && "Interpose agents not assigned");
@@ -455,6 +466,14 @@ Vector2D SteeringBehavior::CalculateWeightedSum()
     assert (!m_vOffset.isZero() && "No offset assigned");
 
     m_vSteeringForce += OffsetPursuit(m_pTargetAgent1, m_vOffset) * m_dWeightOffsetPursuit;
+  }
+
+    if (On(agent_pursuit)) //MC
+  {
+    assert (m_pTargetAgent1 && "pursuit target not assigned");
+    assert (!m_vOffset.isZero() && "No offset assigned");
+
+    m_vSteeringForce += AgentPursuit(m_pTargetAgent1, m_vOffset) * m_dWeightAgentPursuit;
   }
 
   if (On(interpose))
@@ -1416,6 +1435,31 @@ Vector2D SteeringBehavior::FollowPath()
 //------------------------------------------------------------------------
 Vector2D SteeringBehavior::OffsetPursuit(const Vehicle*  leader,
                                           const Vector2D offset)
+{
+  //calculate the offset's position in world space
+  Vector2D WorldOffsetPos = PointToWorldSpace(offset,
+                                                  leader->Heading(),
+                                                  leader->Side(),
+                                                  leader->Pos());
+
+  Vector2D ToOffset = WorldOffsetPos - m_pVehicle->Pos();
+
+  //the lookahead time is propotional to the distance between the leader
+  //and the pursuer; and is inversely proportional to the sum of both
+  //agent's velocities
+  double LookAheadTime = ToOffset.Length() / 
+                        (m_pVehicle->MaxSpeed() + leader->Speed());
+  
+  //now Arrive at the predicted future position of the offset
+  return Arrive(WorldOffsetPos + leader->Velocity() * LookAheadTime, fast);
+}
+
+//------------------------- Agent Pursuit -------------------------------
+//
+//  
+//------------------------------------------------------------------------
+Vector2D SteeringBehavior::AgentPursuit(const Vehicle*  leader,
+                                          const Vector2D offset) //MC
 {
   //calculate the offset's position in world space
   Vector2D WorldOffsetPos = PointToWorldSpace(offset,

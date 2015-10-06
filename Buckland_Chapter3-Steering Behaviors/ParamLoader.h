@@ -54,6 +54,7 @@ private:
     HideWeight              = GetNextParameterFloat() * SteeringForceTweaker;
     EvadeWeight             = GetNextParameterFloat() * SteeringForceTweaker;
     FollowPathWeight        = GetNextParameterFloat() * SteeringForceTweaker;
+	AgentPursuitWeight		= GetNextParameterFloat() * SteeringForceTweaker; //MC
 
     ViewDistance            = GetNextParameterFloat();
     MinDetectionBoxLength   = GetNextParameterFloat();
@@ -118,6 +119,7 @@ public:
   double HideWeight      ;
   double EvadeWeight     ;
   double FollowPathWeight;
+  double AgentPursuitWeight; //MC
 
   //how close a neighbour must be before an agent perceives it (considers it
   //to be within its neighborhood)
