@@ -73,6 +73,7 @@ private:
     hide               = 0x04000,
     flock              = 0x08000,
     offset_pursuit     = 0x10000,
+	agent_pursuit      = 0x20000, //MC
   };
 
 private:
@@ -132,6 +133,7 @@ private:
   double        m_dWeightHide;
   double        m_dWeightEvade;
   double        m_dWeightFollowPath;
+  double        m_dWeightAgentPursuit; //MC
 
   //how far the agent can 'see'
   double        m_dViewDistance;
@@ -222,6 +224,10 @@ private:
   //given a series of Vector2Ds, this method produces a force that will
   //move the agent along the waypoints in order
   Vector2D FollowPath();
+
+  //given a series of Vector2Ds, this method produces a force that will
+  //move the agent along the waypoints in order
+   Vector2D AgentPursuit(const Vehicle* agent, const Vector2D offset); //MC
 
   //this results in a steering force that attempts to steer the vehicle
   //to the center of the vector connecting two moving agents.
@@ -326,6 +332,7 @@ public:
   void HideOn(Vehicle* v){m_iFlags |= hide; m_pTargetAgent1 = v;}
   void OffsetPursuitOn(Vehicle* v1, const Vector2D offset){m_iFlags |= offset_pursuit; m_vOffset = offset; m_pTargetAgent1 = v1;}  
   void FlockingOn(){CohesionOn(); AlignmentOn(); SeparationOn(); WanderOn();}
+  void AgentPursuitOn(Vehicle* v1, const Vector2D offset){m_iFlags |= agent_pursuit;; m_vOffset = offset; m_pTargetAgent1 = v1;SeparationOn();} //MC
 
   void FleeOff()  {if(On(flee))   m_iFlags ^=flee;}
   void SeekOff()  {if(On(seek))   m_iFlags ^=seek;}
@@ -343,6 +350,7 @@ public:
   void HideOff(){if(On(hide)) m_iFlags ^=hide;}
   void OffsetPursuitOff(){if(On(offset_pursuit)) m_iFlags ^=offset_pursuit;}
   void FlockingOff(){CohesionOff(); AlignmentOff(); SeparationOff(); WanderOff();}
+  void AgentPursuitOff(){if(On(agent_pursuit)) {m_iFlags ^=agent_pursuit;AlignmentOff();}} //MC
 
   bool isFleeOn(){return On(flee);}
   bool isSeekOn(){return On(seek);}
@@ -359,6 +367,7 @@ public:
   bool isInterposeOn(){return On(interpose);}
   bool isHideOn(){return On(hide);}
   bool isOffsetPursuitOn(){return On(offset_pursuit);}
+  bool isAgentPursuit(){return On(agent_pursuit);} //MC
 
   double DBoxLength()const{return m_dDBoxLength;}
   const std::vector<Vector2D>& GetFeelers()const{return m_Feelers;}
