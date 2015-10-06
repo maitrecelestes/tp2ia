@@ -1,0 +1,30 @@
+﻿La génération a démarré 06/10/2015 13:21:06.
+     1>Projet "C:\Users\Romain S\Documents\Workspace\workspace_ia\tp2ia\Buckland_Chapter3-Steering Behaviors\Steering.vcxproj" sur le nœud 2 (Build cible(s)).
+     1>ClCompile:
+         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo".\Debug/" /Fd".\Debug/vc110.pdb" /FR".\Debug\\" /Gd /TP /analyze- /errorReport:prompt ..\Common\misc\WindowUtils.cpp
+         WindowUtils.cpp
+       ResourceCompile:
+         C:\Program Files\Windows Kits\8.0\bin\x86\rc.exe /D _DEBUG /D _VC80_UPGRADE=0x0600 /l"0x0809" /nologo /fo".\Debug\Script1.res" Script1.rc 
+       Link:
+         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug/Steering.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:".\Debug/Steering.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE:NO /IMPLIB:".\Debug\Steering.lib" /MACHINE:X86 /SAFESEH .\Debug\Script1.res
+         .\Debug/GameWorld.obj
+         .\Debug/main.obj
+         .\Debug/SteeringBehaviors.obj
+         .\Debug/Vehicle.obj
+         .\Debug/Cgdi.obj
+         .\Debug/iniFileLoaderBase.obj
+         .\Debug/Obstacle.obj
+         .\Debug/ParamLoader.obj
+         .\Debug/Path.obj
+         .\Debug/PrecisionTimer.obj
+         .\Debug/Vector2d.obj
+         .\Debug/WindowUtils.obj
+     1>GameWorld.obj : warning LNK4075: ' /EDITANDCONTINUE' ignoré à cause de la spécification '/SAFESEH'
+         Steering.vcxproj -> C:\Users\Romain S\Documents\Workspace\workspace_ia\tp2ia\Buckland_Chapter3-Steering Behaviors\.\Debug\Steering.exe
+       BscMake:
+         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\bscmake.exe /nologo /o".\Debug/Steering.bsc" .\Debug\GameWorld.sbr .\Debug\main.sbr .\Debug\SteeringBehaviors.sbr .\Debug\Vehicle.sbr .\Debug\Cgdi.sbr .\Debug\iniFileLoaderBase.sbr .\Debug\Obstacle.sbr .\Debug\ParamLoader.sbr .\Debug\Path.sbr .\Debug\PrecisionTimer.sbr .\Debug\Vector2d.sbr .\Debug\WindowUtils.sbr
+     1>Génération du projet "C:\Users\Romain S\Documents\Workspace\workspace_ia\tp2ia\Buckland_Chapter3-Steering Behaviors\Steering.vcxproj" terminée (Build cible(s)).
+
+La génération a réussi.
+
+Temps écoulé 00:00:06.58
