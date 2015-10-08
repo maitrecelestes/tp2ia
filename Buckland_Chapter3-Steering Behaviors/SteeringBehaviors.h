@@ -332,7 +332,7 @@ public:
   void HideOn(Vehicle* v){m_iFlags |= hide; m_pTargetAgent1 = v;}
   void OffsetPursuitOn(Vehicle* v1, const Vector2D offset){m_iFlags |= offset_pursuit; m_vOffset = offset; m_pTargetAgent1 = v1;}  
   void FlockingOn(){CohesionOn(); AlignmentOn(); SeparationOn(); WanderOn();}
-  void AgentPursuitOn(Vehicle* v1, const Vector2D offset){m_iFlags |= agent_pursuit;; m_vOffset = offset; m_pTargetAgent1 = v1;SeparationOn();} //MC
+  void AgentPursuitOn(Vehicle* v1, const Vector2D offset){m_iFlags |= agent_pursuit; m_vOffset = offset; m_pTargetAgent1 = v1;SeparationOn();} //MC
 
   void FleeOff()  {if(On(flee))   m_iFlags ^=flee;}
   void SeekOff()  {if(On(seek))   m_iFlags ^=seek;}

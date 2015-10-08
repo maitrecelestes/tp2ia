@@ -74,8 +74,7 @@ GameWorld::GameWorld(int cx, int cy):
     //add it to the cell subdivision
     m_pCellSpace->AddEntity(pVehicle);
   }
-
-
+  
 #define SHOAL
 #ifdef SHOAL
   m_Vehicles[Prm.NumAgents-1]->Steering()->FlockingOff();
@@ -84,10 +83,27 @@ GameWorld::GameWorld(int cx, int cy):
   m_Vehicles[Prm.NumAgents-1]->SetMaxSpeed(70);
 
 
-   for (int i=0; i<Prm.NumAgents-1; ++i)
+   for (int i=0; i<Prm.NumAgents-20; ++i)
   {
     m_Vehicles[i]->Steering()->EvadeOn(m_Vehicles[Prm.NumAgents-1]);
 
+  } 
+   for (int i=Prm.NumAgents-20; i<Prm.NumAgents-1; ++i)
+  {
+	m_Vehicles[i]->Steering()->FlockingOff();
+	
+	  if(i>Prm.NumAgents-20)
+	  {
+			m_Vehicles[i]->Steering()->AgentPursuitOn(m_Vehicles[i-1], Vector2D(1,1));
+			m_Vehicles[i]->SetScale(Vector2D(6, 6));
+			m_Vehicles[i]->SetMaxSpeed(70);
+	  }
+	  else
+	  {
+		   m_Vehicles[i]->SetScale(Vector2D(10, 10));
+		   m_Vehicles[i]->Steering()->WanderOn();
+		   m_Vehicles[i]->SetMaxSpeed(70);
+	  }
   }
 #endif
  

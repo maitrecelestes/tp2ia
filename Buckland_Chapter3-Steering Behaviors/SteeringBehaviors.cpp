@@ -331,7 +331,6 @@ Vector2D SteeringBehavior::CalculatePrioritized()
   {
     assert (m_pTargetAgent1 && "pursuit target not assigned");
     assert (!m_vOffset.isZero() && "No offset assigned");
-
     force = AgentPursuit(m_pTargetAgent1, m_vOffset);
 
     if (!AccumulateForce(m_vSteeringForce, force)) return m_vSteeringForce;
