@@ -82,9 +82,9 @@ public:
   //-------------------------------------------accessor methods
   SteeringBehavior*const  Steering()const{return m_pSteering;}
   GameWorld*const         World()const{return m_pWorld;} 
-
+  void fixSteerin(Vehicle* _p);
   
-  Vector2D    SmoothedHeading()const{return m_vSmoothedHeading;}
+  Vector2D    SmoothedHeading()const{return m_vSmoothedHeading;} 
 
   bool        isSmoothingOn()const{return m_bSmoothingOn;}
   void        SmoothingOn(){m_bSmoothingOn = true;}

@@ -48,7 +48,6 @@ AgentPoursuiveur::AgentPoursuiveur(GameWorld* world,
  
 }
 
-
 //---------------------------- dtor -------------------------------------
 //-----------------------------------------------------------------------
 AgentPoursuiveur::~AgentPoursuiveur()
@@ -61,7 +60,10 @@ AgentPoursuiveur::~AgentPoursuiveur()
 //  Updates the vehicle's position from a series of steering behaviors
 //------------------------------------------------------------------------
 
-
+void AgentPoursuiveur::fixSteerin(Vehicle* _p)
+{
+	this->Steering()->AgentPursuitOn(_p,Vector2D(1,1));
+}
 
 //----------------------------- InitializeBuffer -----------------------------
 //

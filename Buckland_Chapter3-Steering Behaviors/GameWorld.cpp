@@ -52,7 +52,8 @@ GameWorld::GameWorld(int cx, int cy):
    Vector2D SpawnPosLed = Vector2D(cx/2.0+RandomClamped()*cx/2.0,
                                  cy/2.0+RandomClamped()*cy/2.0);
 
-
+   for (int a=0; a<2; ++a)
+   {
     Leader* pLeader = new Leader(this,
                                     SpawnPosLed,                 //initial position
                                     RandFloat()*TwoPi,        //start rotation
@@ -65,10 +66,9 @@ GameWorld::GameWorld(int cx, int cy):
 
 	pLeader->SetScale(Vector2D(20, 20));
     m_Vehicles.push_back(pLeader);
-	
-	
+	}
   //setup the agents
-  for (int a=0; a<Prm.NumAgents; ++a)
+  for (int a=0; a<21; ++a)
   {
 
     //determine a random starting position
@@ -76,7 +76,7 @@ GameWorld::GameWorld(int cx, int cy):
                                  cy/2.0+RandomClamped()*cy/2.0);
 
 
-    Vehicle* pVehicle = new Vehicle(this,
+    AgentPoursuiveur* pAgentPoursuiveur = new AgentPoursuiveur(this,
                                     SpawnPos,                 //initial position
                                     RandFloat()*TwoPi,        //start rotation
                                     Vector2D(0,0),            //velocity
@@ -86,13 +86,13 @@ GameWorld::GameWorld(int cx, int cy):
                                     Prm.MaxTurnRatePerSecond, //max turn rate
                                     Prm.VehicleScale);        //scale
 
-    pVehicle->Steering()->FlockingOn();
+	pAgentPoursuiveur->fixSteerin(m_Vehicles[a]);
 
-    m_Vehicles.push_back(pVehicle);
+    m_Vehicles.push_back(pAgentPoursuiveur);
     //add it to the cell subdivision
-    m_pCellSpace->AddEntity(pVehicle);
+    m_pCellSpace->AddEntity(pAgentPoursuiveur);
   }
-  
+
 #define SHOAL
 #ifdef SHOAL
  /* m_Vehicles[Prm.NumAgents-1]->Steering()->FlockingOff();
