@@ -172,7 +172,6 @@ void Vehicle::Render()
   }
 }
 
-
 //----------------------------- InitializeBuffer -----------------------------
 //
 //  fills the vehicle's shape buffer with its vertices

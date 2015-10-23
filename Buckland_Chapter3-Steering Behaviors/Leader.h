@@ -34,7 +34,6 @@ private:
   GameWorld*            m_pWorld;
 
   //the steering behavior class
-  SteeringBehavior*     m_pSteering;
 
 
   //some steering behaviors give jerky looking movement. The
@@ -80,13 +79,8 @@ public:
   ~Leader();
 
   //updates the vehicle's position and orientation
-  void        Update(double time_elapsed);
-
-  void        Render();
-
                                                                           
   //-------------------------------------------accessor methods
-  SteeringBehavior*const  Steering()const{return m_pSteering;}
   GameWorld*const         World()const{return m_pWorld;} 
 
   

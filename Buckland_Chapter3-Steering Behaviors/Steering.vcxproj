@@ -139,6 +139,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AgentPoursuiveur.cpp" />
     <ClCompile Include="GameWorld.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -190,6 +191,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AgentPoursuiveur.h" />
     <ClInclude Include="BaseGameEntity.h" />
     <ClInclude Include="..\Common\misc\CellSpacePartition.h" />
     <ClInclude Include="constants.h" />

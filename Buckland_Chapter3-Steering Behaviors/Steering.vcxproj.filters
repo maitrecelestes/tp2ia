@@ -57,6 +57,9 @@
     <ClCompile Include="Leader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AgentPoursuiveur.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseGameEntity.h">
@@ -135,6 +138,9 @@
       <Filter>misc</Filter>
     </ClInclude>
     <ClInclude Include="Leader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AgentPoursuiveur.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

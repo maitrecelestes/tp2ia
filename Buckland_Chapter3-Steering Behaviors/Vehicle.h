@@ -32,8 +32,6 @@ private:
   //path, wall or agent data
   GameWorld*            m_pWorld;
 
-  //the steering behavior class
-  SteeringBehavior*     m_pSteering;
 
 
   //some steering behaviors give jerky looking movement. The
@@ -65,6 +63,9 @@ private:
 
 
 public:
+	
+  //the steering behavior class
+  SteeringBehavior*     m_pSteering;
 
   Vehicle(GameWorld* world,
          Vector2D position,
@@ -75,12 +76,10 @@ public:
          double    max_speed,
          double    max_turn_rate,
          double    scale);
-
   ~Vehicle();
 
   //updates the vehicle's position and orientation
   void        Update(double time_elapsed);
-
   void        Render();
 
                                                                           

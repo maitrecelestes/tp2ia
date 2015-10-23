@@ -9,6 +9,8 @@
 #include "time/PrecisionTimer.h"
 #include "misc/Smoother.h"
 #include "ParamLoader.h"
+#include "Leader.h"
+#include "AgentPoursuiveur.h"
 #include "misc/WindowUtils.h"
 #include "misc/Stream_Utility_Functions.h"
 #include <iostream>
@@ -47,7 +49,24 @@ GameWorld::GameWorld(int cx, int cy):
 
   double border = 30;
   m_pPath = new Path(5, border, border, cx-border, cy-border, true); 
+   Vector2D SpawnPosLed = Vector2D(cx/2.0+RandomClamped()*cx/2.0,
+                                 cy/2.0+RandomClamped()*cy/2.0);
 
+
+    Leader* pLeader = new Leader(this,
+                                    SpawnPosLed,                 //initial position
+                                    RandFloat()*TwoPi,        //start rotation
+                                    Vector2D(0,0),            //velocity
+                                    Prm.VehicleMass,          //mass
+                                    Prm.MaxSteeringForce,     //max force
+                                    Prm.MaxSpeed,             //max velocity
+                                    Prm.MaxTurnRatePerSecond, //max turn rate
+                                    Prm.VehicleScale);        //scale
+
+	pLeader->SetScale(Vector2D(20, 20));
+    m_Vehicles.push_back(pLeader);
+	
+	
   //setup the agents
   for (int a=0; a<Prm.NumAgents; ++a)
   {
@@ -70,14 +89,13 @@ GameWorld::GameWorld(int cx, int cy):
     pVehicle->Steering()->FlockingOn();
 
     m_Vehicles.push_back(pVehicle);
-
     //add it to the cell subdivision
     m_pCellSpace->AddEntity(pVehicle);
   }
   
 #define SHOAL
 #ifdef SHOAL
-  m_Vehicles[Prm.NumAgents-1]->Steering()->FlockingOff();
+ /* m_Vehicles[Prm.NumAgents-1]->Steering()->FlockingOff();
   m_Vehicles[Prm.NumAgents-1]->SetScale(Vector2D(10, 10));
   m_Vehicles[Prm.NumAgents-1]->Steering()->WanderOn();
   m_Vehicles[Prm.NumAgents-1]->SetMaxSpeed(70);
@@ -104,7 +122,7 @@ GameWorld::GameWorld(int cx, int cy):
 		   m_Vehicles[i]->Steering()->WanderOn();
 		   m_Vehicles[i]->SetMaxSpeed(70);
 	  }
-  }
+  }*/
 #endif
  
   //create any obstacles or walls
