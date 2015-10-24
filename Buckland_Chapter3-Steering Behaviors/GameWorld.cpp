@@ -63,8 +63,12 @@ GameWorld::GameWorld(int cx, int cy):
                                     Prm.MaxSpeed,             //max velocity
                                     Prm.MaxTurnRatePerSecond, //max turn rate
                                     Prm.VehicleScale);        //scale
-
 	pLeader->SetScale(Vector2D(20, 20));
+		if(a==0)
+		{
+			pLeader->fixSteerin();
+	pLeader->SetScale(Vector2D(10, 10));
+		}
     m_Vehicles.push_back(pLeader);
 	}
   //setup the agents
@@ -87,7 +91,6 @@ GameWorld::GameWorld(int cx, int cy):
                                     Prm.VehicleScale);        //scale
 
 	pAgentPoursuiveur->fixSteerin(m_Vehicles[a]);
-
     m_Vehicles.push_back(pAgentPoursuiveur);
     //add it to the cell subdivision
     m_pCellSpace->AddEntity(pAgentPoursuiveur);
@@ -95,34 +98,7 @@ GameWorld::GameWorld(int cx, int cy):
 
 #define SHOAL
 #ifdef SHOAL
- /* m_Vehicles[Prm.NumAgents-1]->Steering()->FlockingOff();
-  m_Vehicles[Prm.NumAgents-1]->SetScale(Vector2D(10, 10));
-  m_Vehicles[Prm.NumAgents-1]->Steering()->WanderOn();
-  m_Vehicles[Prm.NumAgents-1]->SetMaxSpeed(70);
-
-
-   for (int i=0; i<Prm.NumAgents-20; ++i)
-  {
-    m_Vehicles[i]->Steering()->EvadeOn(m_Vehicles[Prm.NumAgents-1]);
-
-  } 
-   for (int i=Prm.NumAgents-20; i<Prm.NumAgents-1; ++i)
-  {
-	m_Vehicles[i]->Steering()->FlockingOff();
-	
-	  if(i>Prm.NumAgents-20)
-	  {
-			m_Vehicles[i]->Steering()->AgentPursuitOn(m_Vehicles[i-1], Vector2D(1,1));
-			m_Vehicles[i]->SetScale(Vector2D(6, 6));
-			m_Vehicles[i]->SetMaxSpeed(70);
-	  }
-	  else
-	  {
-		   m_Vehicles[i]->SetScale(Vector2D(10, 10));
-		   m_Vehicles[i]->Steering()->WanderOn();
-		   m_Vehicles[i]->SetMaxSpeed(70);
-	  }
-  }*/
+ 
 #endif
  
   //create any obstacles or walls
@@ -169,6 +145,24 @@ void GameWorld::Update(double time_elapsed)
   {
     m_Vehicles[a]->Update(time_elapsed);
   }
+  const unsigned short MSB = 0x8000;
+
+	if (GetAsyncKeyState (VK_UP) & MSB)
+	{
+		m_Vehicles[1]->ManualUpdate(time_elapsed,1);
+	}
+	if (GetAsyncKeyState (VK_DOWN) & MSB)
+	{
+		m_Vehicles[1]->ManualUpdate(time_elapsed,2);
+	}
+	if (GetAsyncKeyState (VK_LEFT) & MSB)
+	{
+		m_Vehicles[1]->ManualUpdate(time_elapsed,3);
+	}
+	if (GetAsyncKeyState (VK_RIGHT) & MSB)
+	{
+		m_Vehicles[1]->ManualUpdate(time_elapsed,4);
+	}
 }
   
 
@@ -317,9 +311,8 @@ void GameWorld::HandleKeyPresses(WPARAM wParam)
 
       }
 
-      break;
-
-    case 'Y':
+      break;   
+	case 'Y':
 
        m_bShowObstacles = !m_bShowObstacles;
 
@@ -343,6 +336,7 @@ void GameWorld::HandleKeyPresses(WPARAM wParam)
         }
         break;
 
+    
   }//end switch
 }
 

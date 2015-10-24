@@ -42,9 +42,12 @@ Leader::Leader(GameWorld* world,
   //set up the steering behavior class 
   //set up the smoother
   m_pHeadingSmoother = new Smoother<Vector2D>(Prm.NumSamplesForSmoothing, Vector2D(0.0, 0.0)); 
-  this->Steering()->WanderOn();
   
  
+}
+void Leader::fixSteerin()
+{
+	this->Steering()->WanderOn();
 }
 //---------------------------- dtor -------------------------------------
 //-----------------------------------------------------------------------

@@ -1,4 +1,4 @@
-﻿La génération a démarré 23/10/2015 15:10:00.
+﻿La génération a démarré 24/10/2015 15:12:23.
      1>Projet "C:\Users\yoann\Documents\UQAC\IA\Git TP2\TPIA2\Buckland_Chapter3-Steering Behaviors\Steering.vcxproj" sur le nœud 2 (Build cible(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo".\Debug/" /Fd".\Debug/vc110.pdb" /FR".\Debug\\" /Gd /TP /analyze- /errorReport:prompt GameWorld.cpp
@@ -20,10 +20,8 @@
          .\Debug/Vector2d.obj
          .\Debug/WindowUtils.obj
          Steering.vcxproj -> C:\Users\yoann\Documents\UQAC\IA\Git TP2\TPIA2\Buckland_Chapter3-Steering Behaviors\.\Debug\Steering.exe
-       BscMake:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\bscmake.exe /nologo /o".\Debug/Steering.bsc" .\Debug\AgentPoursuiveur.sbr .\Debug\GameWorld.sbr .\Debug\Leader.sbr .\Debug\main.sbr .\Debug\SteeringBehaviors.sbr .\Debug\Vehicle.sbr .\Debug\Cgdi.sbr .\Debug\iniFileLoaderBase.sbr .\Debug\Obstacle.sbr .\Debug\ParamLoader.sbr .\Debug\Path.sbr .\Debug\PrecisionTimer.sbr .\Debug\Vector2d.sbr .\Debug\WindowUtils.sbr
      1>Génération du projet "C:\Users\yoann\Documents\UQAC\IA\Git TP2\TPIA2\Buckland_Chapter3-Steering Behaviors\Steering.vcxproj" terminée (Build cible(s)).
 
 La génération a réussi.
 
-Temps écoulé 00:00:12.66
+Temps écoulé 00:00:07.70

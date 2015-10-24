@@ -62,6 +62,7 @@ Vehicle::~Vehicle()
 //------------------------------------------------------------------------
 void Vehicle::Update(double time_elapsed)
 {    
+	
   //update the time elapsed
   m_dTimeElapsed = time_elapsed;
 
@@ -112,7 +113,59 @@ void Vehicle::Update(double time_elapsed)
     m_vSmoothedHeading = m_pHeadingSmoother->Update(Heading());
   }
 }
+void Vehicle::ManualUpdate(double time_elapsed, double direction)
+{
 
+  m_dTimeElapsed = time_elapsed;
+
+  Vector2D OldPos = Pos();
+
+
+  Vector2D SteeringForce;
+  if(direction==1)
+  {
+	 SteeringForce = Vector2D(0,-10);
+  }
+  if(direction==2)
+  {
+	 SteeringForce = Vector2D(0,10);
+  }
+  if(direction==3)
+  {
+	 SteeringForce = Vector2D(-10,0);
+  }
+  if(direction==4)
+  {
+	 SteeringForce = Vector2D(10,0);
+  }
+
+  Vector2D acceleration = SteeringForce / m_dMass;
+
+  m_vVelocity += acceleration * time_elapsed; 
+
+  m_vVelocity.Truncate(m_dMaxSpeed);
+
+  m_vPos += m_vVelocity * time_elapsed;
+
+  if (m_vVelocity.LengthSq() > 0.00000001)
+  {    
+    m_vHeading = Vec2DNormalize(m_vVelocity);
+
+    m_vSide = m_vHeading.Perp();
+  }
+
+  WrapAround(m_vPos, m_pWorld->cxClient(), m_pWorld->cyClient());
+
+  if (Steering()->isSpacePartitioningOn())
+  {
+    World()->CellSpace()->UpdateEntity(this, OldPos);
+  }
+
+  if (isSmoothingOn())
+  {
+    m_vSmoothedHeading = m_pHeadingSmoother->Update(Heading());
+  }
+}
 
 //-------------------------------- Render -------------------------------------
 //-----------------------------------------------------------------------------
