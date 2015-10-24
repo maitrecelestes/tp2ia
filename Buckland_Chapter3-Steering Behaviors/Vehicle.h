@@ -81,7 +81,7 @@ public:
   //updates the vehicle's position and orientation
   void        Update(double time_elapsed);
   void        Render();
-  void		  ManualUpdate(double time_elapsed, double direction);
+  void		  ManualUpdate(double time_elapsed, bool dir1, bool dir2, bool dir3, bool dir4);
 
                                                                           
   //-------------------------------------------accessor methods

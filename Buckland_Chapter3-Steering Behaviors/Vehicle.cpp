@@ -113,7 +113,7 @@ void Vehicle::Update(double time_elapsed)
     m_vSmoothedHeading = m_pHeadingSmoother->Update(Heading());
   }
 }
-void Vehicle::ManualUpdate(double time_elapsed, double direction)
+void Vehicle::ManualUpdate(double time_elapsed, bool dir1, bool dir2, bool dir3, bool dir4)
 {
 
   m_dTimeElapsed = time_elapsed;
@@ -122,19 +122,19 @@ void Vehicle::ManualUpdate(double time_elapsed, double direction)
 
 
   Vector2D SteeringForce;
-  if(direction==1)
+  if(dir1)
   {
 	 SteeringForce = Vector2D(0,-10);
   }
-  if(direction==2)
+  if(dir2)
   {
 	 SteeringForce = Vector2D(0,10);
   }
-  if(direction==3)
+  if(dir3)
   {
 	 SteeringForce = Vector2D(-10,0);
   }
-  if(direction==4)
+  if(dir4)
   {
 	 SteeringForce = Vector2D(10,0);
   }

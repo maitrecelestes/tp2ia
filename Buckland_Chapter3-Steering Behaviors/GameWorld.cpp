@@ -146,8 +146,23 @@ void GameWorld::Update(double time_elapsed)
     m_Vehicles[a]->Update(time_elapsed);
   }
   const unsigned short MSB = 0x8000;
-
-	if (GetAsyncKeyState (VK_UP) & MSB)
+    bool a=false;
+  bool b=false;
+  bool c=false;
+  bool d=false;
+	if ((GetAsyncKeyState (VK_UP) || GetAsyncKeyState (VK_DOWN) || GetAsyncKeyState (VK_LEFT) ||GetAsyncKeyState (VK_RIGHT)))
+	{
+		if (GetAsyncKeyState (VK_UP))
+			a=true;
+		if (GetAsyncKeyState (VK_DOWN))
+			b=true;
+		if (GetAsyncKeyState (VK_LEFT))
+			c=true;
+		if (GetAsyncKeyState (VK_RIGHT))
+			d=true;
+		m_Vehicles[1]->ManualUpdate(time_elapsed,a,b,c,d);
+	}
+	/*if (GetAsyncKeyState (VK_UP) & MSB)
 	{
 		m_Vehicles[1]->ManualUpdate(time_elapsed,1);
 	}
@@ -162,7 +177,7 @@ void GameWorld::Update(double time_elapsed)
 	if (GetAsyncKeyState (VK_RIGHT) & MSB)
 	{
 		m_Vehicles[1]->ManualUpdate(time_elapsed,4);
-	}
+	}*/
 }
   
 
